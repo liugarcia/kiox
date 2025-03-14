@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/x-icon" href="https://raw.githubusercontent.com/liugarcia/blokiox/refs/heads/main/logo-blokiox.png">
+    <title>Blokiox - Sistema de Orçamentação</title>
+    <link rel="stylesheet" href="styles.css">
+  <meta name="theme-color" content="#000000">
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #0d0d0d  ;
+            color: #fff;
+        }
+        header {
+            background-color: #1a1a1a;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+        .logo {
+            width: 180px;
+        }
+        nav {
+            display: flex;
+        }
+        .menu {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            gap: 20px;
+        }
+        .menu li {
+            display: inline;
+        
+        }
+        .menu li a {
+            color: #ccc;
+            text-decoration: none;
+            font-size: 18px;
+            transition: color 0.3s;
+        }
+        .menu li a:hover {
+            color: #fff;
+       
+        }
+        .menu-toggle {
+            display: none;
+            font-size: 24px;
+            cursor: pointer;
+            margin-right: auto; /* Move o ícone para a esquerda */
+        }
+        @media (max-width: 768px) {
+            .menu {
+                display: none;
+                flex-direction: column;
+                background: #1a1a1a;
+                position: absolute;
+                top: 60px;
+                left: 20px; /* Alinha o menu à esquerda */
+                width: 200px;
+                padding: 10px;
+                border-radius: 5px;
+            }
+            .menu.active {
+                display: flex;
+            }
+            .menu-toggle {
+                display: block;
+            }
+        }
+        .hero {
+            background: linear-gradient(135deg, #1a1a1a, #000);
+            text-align: center;
+            padding: 150px 20px 80px; /* Ajuste para o header fixo */
+        }
+        .hero h1 {
+            font-size: 2.8em;
+            animation: fadeIn 2s ease-in-out;
+        }
+        .hero p {
+            font-size: 1.2em;
+            margin-bottom: 20px;
+            color: #bbb;
+            animation: fadeIn 3s ease-in-out;
+        }
+        .btn {
+            display: inline-block;
+            padding: 12px 25px;
+            background: #444;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 1.2em;
+            transition: background 0.3s, transform 0.3s;
+        }
+        .btn:hover {
+            background: #666;
+            transform: scale(1.05);
+        }
+        .section {
+            padding: 60px 20px;
+            text-align: center;
+            background: #222;
+            opacity: 0;
+            transform: translateY(50px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+        .section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .features-grid {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+        .feature-item {
+            background: #333;
+            padding: 20px;
+            border-radius: 10px;
+            width: 30%;
+            min-width: 280px;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .feature-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+        footer {
+            background: #000;
+            text-align: center;
+            padding: 20px 0;
+        }
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="menu-toggle" onclick="toggleMenu()">☰</div>
+        <nav>
+            <ul class="menu">
+                   <li><a href="index.html">Voltar</a></li>
+              <li> 
+    <a href="https://blokiox-717.pages.dev/" target="_blank">Testar Sistema</a> 
+</li>
+
+                    <li><a href="parceiros.html">Parceiros</a></li>
+                <li><a href="mercado.html">Mercado Blokiox</a></li>
+          
+            </ul>
+        </nav>
+    </header>
+    
+    <section class="hero">
+      <img src="https://raw.githubusercontent.com/liugarcia/blokiox/refs/heads/main/logo-blokiox.png" alt="Blokiox Logo" class="logo">
+        <h3>Em breve</h3>
+      <br><br><br><br><br><br></section>
+        
+    <footer>
+        <p>&copy; 2025 Blokiox. Todos os direitos reservados.</p>
+    </footer>
+    
+    <script>
+        function toggleMenu() {
+            document.querySelector('.menu').classList.toggle('active');
+        }
+
+        function smoothScroll(event) {
+            event.preventDefault();
+            const targetId = event.currentTarget.getAttribute("href");
+            const targetElement = document.querySelector(targetId);
+            targetElement.scrollIntoView({
+                behavior: 'smooth',
+                block: 'start'
+            });
+        }
+
+        document.addEventListener('scroll', () => {
+            const sections = document.querySelectorAll('.section');
+            sections.forEach(section => {
+                const sectionTop = section.getBoundingClientRect().top;
+                if (sectionTop < window.innerHeight - 100) {
+                    section.classList.add('visible');
+                }
+            });
+        });
+    </script>
+</body>
+</html>

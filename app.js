@@ -261,19 +261,19 @@ if (observacoes) {
           
           
           // Adiciona o rodapé com os textos
-const footerText1 = "A Blokiox é um sistema de uso aberto e livre e não se responsabiliza por orçamentos gerados por seus usuários.";
-const footerText2 = "Orçamento gerado através do sistema Blokiox: www.blokiox.com"; // Novo aviso
+const footerText1 = "VERSÃO DE TESTE, ADQUIRA A VERSÃO PRO EM: sistemablokiox@gmail.com";
+const footerText2 = "Personalize logo e dados da sua empresa adquirindo a versão pro."; // Novo aviso
 const pageHeight = doc.internal.pageSize.getHeight(); // Altura da página
-const footerY1 = pageHeight - 15; // Posição Y do primeiro rodapé (15mm da parte inferior)
-const footerY2 = pageHeight - 10; // Posição Y do segundo rodapé (10mm da parte inferior)
+const footerY1 = pageHeight - 25; // Posição Y do primeiro rodapé (15mm da parte inferior)
+const footerY2 = pageHeight - 15; // Posição Y do segundo rodapé (10mm da parte inferior)
 
 // Adiciona o primeiro rodapé (centralizado, preto e tamanho 6)
-doc.setFontSize(6); // Tamanho da fonte do primeiro rodapé
+doc.setFontSize(10); // Tamanho da fonte do primeiro rodapé
 doc.setTextColor(255, 0, 0); // Cor do texto (preto)
 doc.text(footerText1, doc.internal.pageSize.getWidth() / 2, footerY1, { align: 'center' });
 
 // Adiciona o segundo rodapé (centralizado, vermelho e tamanho 8)
-doc.setFontSize(6); // Tamanho da fonte do segundo rodapé
+doc.setFontSize(9); // Tamanho da fonte do segundo rodapé
 doc.setTextColor(0, 0, 0); // Cor do texto (vermelho)
 doc.text(footerText2, doc.internal.pageSize.getWidth() / 2, footerY2, { align: 'center' });
           

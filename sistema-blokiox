@@ -1,0 +1,1393 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link rel="icon" type="image/x-icon" href="https://raw.githubusercontent.com/liugarcia/blokiox/refs/heads/main/logo-blokiox.png">
+<meta name="theme-color" content="black" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <link rel="manifest" href="manifest.json" />
+    
+    
+    <link rel="icon" type="image/png" sizes="32x32" href="https://i.postimg.cc/9QCbxyf4/Picsart-25-02-26-15-48-41-494.png">
+<link rel="icon" type="image/png" sizes="16x16" href="https://i.postimg.cc/9QCbxyf4/Picsart-25-02-26-15-48-41-494.png">
+<link rel="apple-touch-icon" href="https://i.postimg.cc/9QCbxyf4/Picsart-25-02-26-15-48-41-494.png">
+<link rel="manifest" href="https://i.postimg.cc/9QCbxyf4/Picsart-25-02-26-15-48-41-494.png">
+
+    <title>Sistema Blokiox</title>
+
+    <meta name="theme-color" content="black" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta
+      name="apple-mobile-web-app-status-bar-style"
+      content="black-translucent"
+    />
+    <link rel="apple-touch-icon" href="https://raw.githubusercontent.com/liugarcia/blokiox/refs/heads/main/logo-blokiox.png" />
+    <link rel="stylesheet" href="desenho.css" />
+  </head>
+  <body>
+    <!-- Cabeçalho da Oficina -->
+    <div class="cabecalho-oficina">
+      <div class="logo">
+        <img
+          src="https://raw.githubusercontent.com/liugarcia/blokiox/refs/heads/main/logo-blokiox.png"
+          alt="Logo da Oficina"
+        />
+      </div>
+      <div class="info">
+        <p><strong>Sistema Blokiox</strong></p>
+        <p>CNPJ: 00.000.000/0000-00</p>
+        <p>Telefone: (xx) xxxx-xxxx</p>
+        <p>Quer sua logo aqui? Envie E-mail: sistemablokiox@gmail.com</p>
+        <p>Endereço: Rua das Oficinas, 123 - Centro, São Paulo - SP</p>
+      </div>
+    </div>
+
+    <div class="container">
+      <h3 style="background-color: black; color: #ffffff; padding: 10px 20px">
+        Dados do Cliente
+      </h3>
+      <table class="header-table">
+        <tr>
+          <td>Nome: <input type="text" id="nome" /></td>
+          <td>Data: <input type="text" id="data" readonly /></td>
+        </tr>
+        <tr>
+          <td>Rua/Número: <input type="text" id="endereco" /></td>
+          <td>Bairro/Cidade: <input type="text" id="bairro" /></td>
+        </tr>
+        <tr>
+          <td>Telefone: <input type="number" id="telefone" /></td>
+          <td>CNPJ/CPF: <input type="number" id="cnpjcpf" /></td>
+        </tr>
+        <tr>
+          <td>Veículo: <input type="text" id="veiculo" /></td>
+          <td>
+            Placa:
+            <input
+              type="text"
+              id="placa"
+              oninput="this.value = this.value.toUpperCase()"
+            />
+          </td>
+        </tr>
+        <tr>
+          <td>Cor: <input type="text" id="cor" /></td>
+
+          <td>
+            Ano:
+            <select id="ano">
+              <script>
+                let anoAtual = new Date().getFullYear();
+                let selectAno = document.getElementById("ano");
+                for (let ano = anoAtual; ano >= 1930; ano--) {
+                  let option = document.createElement("option");
+                  option.value = ano;
+                  option.textContent = ano;
+                  selectAno.appendChild(option);
+                }
+              </script>
+            </select>
+          </td>
+        </tr>
+      </table>
+      <table>
+        <tr>
+          <td>Orçamentista: <input type="text" id="orcamentista" /></td>
+        </tr>
+
+        <td>
+          Orçamento válido por:
+          <select id="validade">
+            <script>
+              let validadeOptions = [5, 10, 15, 20, 30];
+              let selectValidade = document.getElementById("validade");
+              validadeOptions.forEach((dias) => {
+                let option = document.createElement("option");
+                option.value = dias;
+                option.textContent = `${dias} dias`;
+                selectValidade.appendChild(option);
+              });
+            </script>
+          </select>
+        </td>
+      </table>
+
+      <h3 style="background-color: black; color: #ffffff; padding: 10px 20px">
+        Mão de obra
+      </h3>
+      <table id="servicos">
+        <tr>
+          <th>Peça</th>
+          <th>Descrição</th>
+          <th>Valor (R$)</th>
+        </tr>
+        <tr>
+          <td>Capô</td>
+          <td>
+            <label
+              >Trocar
+              <input type="checkbox" class="servico-checkbox" name="opcao"
+            /></label>
+            <label
+              >Restaurar
+              <input type="checkbox" class="servico-checkbox" name="opcao"
+            /></label>
+            <label
+              >Pintar <input type="checkbox" class="servico-checkbox"
+            /></label>
+          </td>
+          <td>
+            <input
+              type="number"
+              step="0.01"
+              class="valor-servico"
+              oninput="calcularTotal()"
+            />
+          </td>
+        </tr>
+        <tr>
+          <td>Para-choque dianteiro</td>
+          <td>
+            <label
+              >Trocar
+              <input type="checkbox" class="servico-checkbox" name="opcao"
+            /></label>
+            <label
+              >Restaurar
+              <input type="checkbox" class="servico-checkbox" name="opcao"
+            /></label>
+            <label
+              >Pintar <input type="checkbox" class="servico-checkbox"
+            /></label>
+          </td>
+          <td>
+            <input
+              type="number"
+              step="0.01"
+              class="valor-servico"
+              oninput="calcularTotal()"
+            />
+          </td>
+        </tr>
+
+        <tr>
+          <td>Alma do para-choque dianteiro</td>
+          <td>
+            <label
+              >Trocar
+              <input type="checkbox" class="servico-checkbox" name="opcao"
+            /></label>
+            <label
+              >Restaurar
+              <input type="checkbox" class="servico-checkbox" name="opcao"
+            /></label>
+            <label
+              >Pintar <input type="checkbox" class="servico-checkbox"
+            /></label>
+          </td>
+          <td>
+            <input
+              type="number"
+              step="0.01"
+              class="valor-servico"
+              oninput="calcularTotal()"
+            />
+          </td>
+        </tr>
+
+        <tr>
+          <td>Painel dianteiro</td>
+          <td>
+            <label
+              >Trocar
+              <input type="checkbox" class="servico-checkbox" name="opcao"
+            /></label>
+            <label
+              >Restaurar
+              <input type="checkbox" class="servico-checkbox" name="opcao"
+            /></label>
+            <label
+              >Pintar <input type="checkbox" class="servico-checkbox"
+            /></label>
+          </td>
+          <td>
+            <input
+              type="number"
+              step="0.01"
+              class="valor-servico"
+              oninput="calcularTotal()"
+            />
+          </td>
+        </tr>
+        <tr>
+          <td>Paralama dianteiro esquerdo</td>
+          <td>
+            <label
+              >Trocar
+              <input type="checkbox" class="servico-checkbox" name="opcao"
+            /></label>
+            <label
+              >Restaurar
+              <input type="checkbox" class="servico-checkbox" name="opcao"
+            /></label>
+            <label
+              >Pintar <input type="checkbox" class="servico-checkbox"
+            /></label>
+          </td>
+          <td>
+            <input
+              type="number"
+              step="0.01"
+              class="valor-servico"
+              oninput="calcularTotal()"
+            />
+          </td>
+        </tr>
+        <tr>
+          <td>Paralama dianteiro direito</td>
+          <td>
+            <label
+              >Trocar
+              <input type="checkbox" class="servico-checkbox" name="opcao"
+            /></label>
+            <label
+              >Restaurar
+              <input type="checkbox" class="servico-checkbox" name="opcao"
+            /></label>
+            <label
+              >Pintar <input type="checkbox" class="servico-checkbox"
+            /></label>
+          </td>
+          <td>
+            <input
+              type="number"
+              step="0.01"
+              class="valor-servico"
+              oninput="calcularTotal()"
+            />
+          </td>
+        </tr>
+        <tr>
+          <td>Longarina dianteira esquerda</td>
+          <td>
+            <label
+              >Trocar
+              <input type="checkbox" class="servico-checkbox" name="opcao"
+            /></label>
+            <label
+              >Restaurar
+              <input type="checkbox" class="servico-checkbox" name="opcao"
+            /></label>
+            <label
+              >Pintar <input type="checkbox" class="servico-checkbox"
+            /></label>
+          </td>
+          <td>
+            <input
+              type="number"
+              step="0.01"
+              class="valor-servico"
+              oninput="calcularTotal()"
+            />
+          </td>
+        </tr>
+        <tr>
+          <td>Longarina dianteira direita</td>
+          <td>
+            <label
+              >Trocar
+              <input type="checkbox" class="servico-checkbox" name="opcao"
+            /></label>
+            <label
+              >Restaurar
+              <input type="checkbox" class="servico-checkbox" name="opcao"
+            /></label>
+            <label
+              >Pintar <input type="checkbox" class="servico-checkbox"
+            /></label>
+          </td>
+          <td>
+            <input
+              type="number"
+              step="0.01"
+              class="valor-servico"
+              oninput="calcularTotal()"
+            />
+          </td>
+        </tr>
+        <tr>
+          <td>Caixa de roda dianteira esquerda</td>
+          <td>
+            <label
+              >Trocar
+              <input type="checkbox" class="servico-checkbox" name="opcao"
+            /></label>
+            <label
+              >Restaurar
+              <input type="checkbox" class="servico-checkbox" name="opcao"
+            /></label>
+            <label
+              >Pintar <input type="checkbox" class="servico-checkbox"
+            /></label>
+          </td>
+          <td>
+            <input
+              type="number"
+              step="0.01"
+              class="valor-servico"
+              oninput="calcularTotal()"
+            />
+          </td>
+        </tr>
+        <tr>
+          <td>Caixa de roda dianteira direita</td>
+          <td>
+            <label
+              >Trocar
+              <input type="checkbox" class="servico-checkbox" name="opcao"
+            /></label>
+            <label
+              >Restaurar
+              <input type="checkbox" class="servico-checkbox" name="opcao"
+            /></label>
+            <label
+              >Pintar <input type="checkbox" class="servico-checkbox"
+            /></label>
+          </td>
+          <td>
+            <input
+              type="number"
+              step="0.01"
+              class="valor-servico"
+              oninput="calcularTotal()"
+            />
+          </td>
+        </tr>
+
+        <tr>
+          <td>Retrovisor esquerdo</td>
+          <td>
+            <label
+              >Trocar
+              <input type="checkbox" class="servico-checkbox" name="opcao"
+            /></label>
+            <label
+              >Restaurar
+              <input type="checkbox" class="servico-checkbox" name="opcao"
+            /></label>
+            <label
+              >Pintar <input type="checkbox" class="servico-checkbox"
+            /></label>
+          </td>
+          <td>
+            <input
+              type="number"
+              step="0.01"
+              class="valor-servico"
+              oninput="calcularTotal()"
+            />
+          </td>
+        </tr>
+        <tr>
+          <td>Retrovisor direito</td>
+          <td>
+            <label
+              >Trocar
+              <input type="checkbox" class="servico-checkbox" name="opcao"
+            /></label>
+            <label
+              >Restaurar
+              <input type="checkbox" class="servico-checkbox" name="opcao"
+            /></label>
+            <label
+              >Pintar <input type="checkbox" class="servico-checkbox"
+            /></label>
+          </td>
+          <td>
+            <input
+              type="number"
+              step="0.01"
+              class="valor-servico"
+              oninput="calcularTotal()"
+            />
+          </td>
+        </tr>
+
+        <tr>
+          <td>Porta dianteira esquerda</td>
+          <td>
+            <label
+              >Trocar
+              <input type="checkbox" class="servico-checkbox" name="opcao"
+            /></label>
+            <label
+              >Restaurar
+              <input type="checkbox" class="servico-checkbox" name="opcao"
+            /></label>
+            <label
+              >Pintar <input type="checkbox" class="servico-checkbox"
+            /></label>
+          </td>
+          <td>
+            <input
+              type="number"
+              step="0.01"
+              class="valor-servico"
+              oninput="calcularTotal()"
+            />
+          </td>
+        </tr>
+        <tr>
+          <td>Porta dianteira direita</td>
+          <td>
+            <label
+              >Trocar
+              <input type="checkbox" class="servico-checkbox" name="opcao"
+            /></label>
+            <label
+              >Restaurar
+              <input type="checkbox" class="servico-checkbox" name="opcao"
+            /></label>
+            <label
+              >Pintar <input type="checkbox" class="servico-checkbox"
+            /></label>
+          </td>
+          <td>
+            <input
+              type="number"
+              step="0.01"
+              class="valor-servico"
+              oninput="calcularTotal()"
+            />
+          </td>
+        </tr>
+        <tr>
+          <td>Porta traseira esquerda</td>
+          <td>
+            <label
+              >Trocar
+              <input type="checkbox" class="servico-checkbox" name="opcao"
+            /></label>
+            <label
+              >Restaurar
+              <input type="checkbox" class="servico-checkbox" name="opcao"
+            /></label>
+            <label
+              >Pintar <input type="checkbox" class="servico-checkbox"
+            /></label>
+          </td>
+          <td>
+            <input
+              type="number"
+              step="0.01"
+              class="valor-servico"
+              oninput="calcularTotal()"
+            />
+          </td>
+        </tr>
+        <tr>
+          <td>Porta traseira direita</td>
+          <td>
+            <label
+              >Trocar
+              <input type="checkbox" class="servico-checkbox" name="opcao"
+            /></label>
+            <label
+              >Restaurar
+              <input type="checkbox" class="servico-checkbox" name="opcao"
+            /></label>
+            <label
+              >Pintar <input type="checkbox" class="servico-checkbox"
+            /></label>
+          </td>
+          <td>
+            <input
+              type="number"
+              step="0.01"
+              class="valor-servico"
+              oninput="calcularTotal()"
+            />
+          </td>
+        </tr>
+        <tr>
+          <td>Soleira esquerda</td>
+          <td>
+            <label
+              >Trocar
+              <input type="checkbox" class="servico-checkbox" name="opcao"
+            /></label>
+            <label
+              >Restaurar
+              <input type="checkbox" class="servico-checkbox" name="opcao"
+            /></label>
+            <label
+              >Pintar <input type="checkbox" class="servico-checkbox"
+            /></label>
+          </td>
+          <td>
+            <input
+              type="number"
+              step="0.01"
+              class="valor-servico"
+              oninput="calcularTotal()"
+            />
+          </td>
+        </tr>
+        <tr>
+          <td>Soleira direita</td>
+          <td>
+            <label
+              >Trocar
+              <input type="checkbox" class="servico-checkbox" name="opcao"
+            /></label>
+            <label
+              >Restaurar
+              <input type="checkbox" class="servico-checkbox" name="opcao"
+            /></label>
+            <label
+              >Pintar <input type="checkbox" class="servico-checkbox"
+            /></label>
+          </td>
+          <td>
+            <input
+              type="number"
+              step="0.01"
+              class="valor-servico"
+              oninput="calcularTotal()"
+            />
+          </td>
+        </tr>
+        <tr>
+          <td>Coluna dianteira esquerda</td>
+          <td>
+            <label
+              >Trocar
+              <input type="checkbox" class="servico-checkbox" name="opcao"
+            /></label>
+            <label
+              >Restaurar
+              <input type="checkbox" class="servico-checkbox" name="opcao"
+            /></label>
+            <label
+              >Pintar <input type="checkbox" class="servico-checkbox"
+            /></label>
+          </td>
+          <td>
+            <input
+              type="number"
+              step="0.01"
+              class="valor-servico"
+              oninput="calcularTotal()"
+            />
+          </td>
+        </tr>
+        <tr>
+          <td>Coluna dianteira direita</td>
+          <td>
+            <label
+              >Trocar
+              <input type="checkbox" class="servico-checkbox" name="opcao"
+            /></label>
+            <label
+              >Restaurar
+              <input type="checkbox" class="servico-checkbox" name="opcao"
+            /></label>
+            <label
+              >Pintar <input type="checkbox" class="servico-checkbox"
+            /></label>
+          </td>
+          <td>
+            <input
+              type="number"
+              step="0.01"
+              class="valor-servico"
+              oninput="calcularTotal()"
+            />
+          </td>
+        </tr>
+        <tr>
+          <td>Coluna central esquerda</td>
+          <td>
+            <label
+              >Trocar
+              <input type="checkbox" class="servico-checkbox" name="opcao"
+            /></label>
+            <label
+              >Restaurar
+              <input type="checkbox" class="servico-checkbox" name="opcao"
+            /></label>
+            <label
+              >Pintar <input type="checkbox" class="servico-checkbox"
+            /></label>
+          </td>
+          <td>
+            <input
+              type="number"
+              step="0.01"
+              class="valor-servico"
+              oninput="calcularTotal()"
+            />
+          </td>
+        </tr>
+
+        <tr>
+          <td>Coluna central direita</td>
+          <td>
+            <label
+              >Trocar
+              <input type="checkbox" class="servico-checkbox" name="opcao"
+            /></label>
+            <label
+              >Restaurar
+              <input type="checkbox" class="servico-checkbox" name="opcao"
+            /></label>
+            <label
+              >Pintar <input type="checkbox" class="servico-checkbox"
+            /></label>
+          </td>
+          <td>
+            <input
+              type="number"
+              step="0.01"
+              class="valor-servico"
+              oninput="calcularTotal()"
+            />
+          </td>
+        </tr>
+        <tr>
+          <td>Coluna traseira esquerda</td>
+          <td>
+            <label
+              >Trocar
+              <input type="checkbox" class="servico-checkbox" name="opcao"
+            /></label>
+            <label
+              >Restaurar
+              <input type="checkbox" class="servico-checkbox" name="opcao"
+            /></label>
+            <label
+              >Pintar <input type="checkbox" class="servico-checkbox"
+            /></label>
+          </td>
+          <td>
+            <input
+              type="number"
+              step="0.01"
+              class="valor-servico"
+              oninput="calcularTotal()"
+            />
+          </td>
+        </tr>
+        <tr>
+          <td>Coluna traseira direita</td>
+          <td>
+            <label
+              >Trocar
+              <input type="checkbox" class="servico-checkbox" name="opcao"
+            /></label>
+            <label
+              >Restaurar
+              <input type="checkbox" class="servico-checkbox" name="opcao"
+            /></label>
+            <label
+              >Pintar <input type="checkbox" class="servico-checkbox"
+            /></label>
+          </td>
+          <td>
+            <input
+              type="number"
+              step="0.01"
+              class="valor-servico"
+              oninput="calcularTotal()"
+            />
+          </td>
+        </tr>
+        <tr>
+          <td>Lateral esquerda</td>
+          <td>
+            <label
+              >Trocar
+              <input type="checkbox" class="servico-checkbox" name="opcao"
+            /></label>
+            <label
+              >Restaurar
+              <input type="checkbox" class="servico-checkbox" name="opcao"
+            /></label>
+            <label
+              >Pintar <input type="checkbox" class="servico-checkbox"
+            /></label>
+          </td>
+          <td>
+            <input
+              type="number"
+              step="0.01"
+              class="valor-servico"
+              oninput="calcularTotal()"
+            />
+          </td>
+        </tr>
+        <tr>
+          <td>Lateral direita</td>
+          <td>
+            <label
+              >Trocar
+              <input type="checkbox" class="servico-checkbox" name="opcao"
+            /></label>
+            <label
+              >Restaurar
+              <input type="checkbox" class="servico-checkbox" name="opcao"
+            /></label>
+            <label
+              >Pintar <input type="checkbox" class="servico-checkbox"
+            /></label>
+          </td>
+          <td>
+            <input
+              type="number"
+              step="0.01"
+              class="valor-servico"
+              oninput="calcularTotal()"
+            />
+          </td>
+        </tr>
+        <tr>
+          <td>Alojamento da lanterna esquerda</td>
+          <td>
+            <label
+              >Trocar
+              <input type="checkbox" class="servico-checkbox" name="opcao"
+            /></label>
+            <label
+              >Restaurar
+              <input type="checkbox" class="servico-checkbox" name="opcao"
+            /></label>
+            <label
+              >Pintar <input type="checkbox" class="servico-checkbox"
+            /></label>
+          </td>
+          <td>
+            <input
+              type="number"
+              step="0.01"
+              class="valor-servico"
+              oninput="calcularTotal()"
+            />
+          </td>
+        </tr>
+        <tr>
+          <td>Alojamento da lanterna direita</td>
+          <td>
+            <label
+              >Trocar
+              <input type="checkbox" class="servico-checkbox" name="opcao"
+            /></label>
+            <label
+              >Restaurar
+              <input type="checkbox" class="servico-checkbox" name="opcao"
+            /></label>
+            <label
+              >Pintar <input type="checkbox" class="servico-checkbox"
+            /></label>
+          </td>
+          <td>
+            <input
+              type="number"
+              step="0.01"
+              class="valor-servico"
+              oninput="calcularTotal()"
+            />
+          </td>
+        </tr>
+        <tr>
+          <td>Parachoque traseiro</td>
+          <td>
+            <label
+              >Trocar
+              <input type="checkbox" class="servico-checkbox" name="opcao"
+            /></label>
+            <label
+              >Restaurar
+              <input type="checkbox" class="servico-checkbox" name="opcao"
+            /></label>
+            <label
+              >Pintar <input type="checkbox" class="servico-checkbox"
+            /></label>
+          </td>
+
+          <td>
+            <input
+              type="number"
+              step="0.01"
+              class="valor-servico"
+              oninput="calcularTotal()"
+            />
+          </td>
+        </tr>
+        <tr>
+          <td>Alma do parachoque traseiro</td>
+          <td>
+            <label
+              >Trocar
+              <input type="checkbox" class="servico-checkbox" name="opcao"
+            /></label>
+            <label
+              >Restaurar
+              <input type="checkbox" class="servico-checkbox" name="opcao"
+            /></label>
+            <label
+              >Pintar <input type="checkbox" class="servico-checkbox"
+            /></label>
+          </td>
+
+          <td>
+            <input
+              type="number"
+              step="0.01"
+              class="valor-servico"
+              oninput="calcularTotal()"
+            />
+          </td>
+        </tr>
+        <tr>
+          <td>Painel traseiro</td>
+          <td>
+            <label
+              >Trocar
+              <input type="checkbox" class="servico-checkbox" name="opcao"
+            /></label>
+            <label
+              >Restaurar
+              <input type="checkbox" class="servico-checkbox" name="opcao"
+            /></label>
+            <label
+              >Pintar <input type="checkbox" class="servico-checkbox"
+            /></label>
+          </td>
+          <td>
+            <input
+              type="number"
+              step="0.01"
+              class="valor-servico"
+              oninput="calcularTotal()"
+            />
+          </td>
+        </tr>
+
+        <tr>
+          <td>Assoalho traseiro</td>
+          <td>
+            <label
+              >Trocar
+              <input type="checkbox" class="servico-checkbox" name="opcao"
+            /></label>
+            <label
+              >Restaurar
+              <input type="checkbox" class="servico-checkbox" name="opcao"
+            /></label>
+            <label
+              >Pintar <input type="checkbox" class="servico-checkbox"
+            /></label>
+          </td>
+          <td>
+            <input
+              type="number"
+              step="0.01"
+              class="valor-servico"
+              oninput="calcularTotal()"
+            />
+          </td>
+        </tr>
+        <tr>
+          <td>Assoalho central</td>
+          <td>
+            <label
+              >Trocar
+              <input type="checkbox" class="servico-checkbox" name="opcao"
+            /></label>
+            <label
+              >Restaurar
+              <input type="checkbox" class="servico-checkbox" name="opcao"
+            /></label>
+            <label
+              >Pintar <input type="checkbox" class="servico-checkbox"
+            /></label>
+          </td>
+          <td>
+            <input
+              type="number"
+              step="0.01"
+              class="valor-servico"
+              oninput="calcularTotal()"
+            />
+          </td>
+        </tr>
+        <tr>
+          <td>Longarina traseira esquerda</td>
+          <td>
+            <label
+              >Trocar
+              <input type="checkbox" class="servico-checkbox" name="opcao"
+            /></label>
+            <label
+              >Restaurar
+              <input type="checkbox" class="servico-checkbox" name="opcao"
+            /></label>
+            <label
+              >Pintar <input type="checkbox" class="servico-checkbox"
+            /></label>
+          </td>
+          <td>
+            <input
+              type="number"
+              step="0.01"
+              class="valor-servico"
+              oninput="calcularTotal()"
+            />
+          </td>
+        </tr>
+        <tr>
+          <td>Longarina traseira direita</td>
+          <td>
+            <label
+              >Trocar
+              <input type="checkbox" class="servico-checkbox" name="opcao"
+            /></label>
+            <label
+              >Restaurar
+              <input type="checkbox" class="servico-checkbox" name="opcao"
+            /></label>
+            <label
+              >Pintar <input type="checkbox" class="servico-checkbox"
+            /></label>
+          </td>
+          <td>
+            <input
+              type="number"
+              step="0.01"
+              class="valor-servico"
+              oninput="calcularTotal()"
+            />
+          </td>
+        </tr>
+        <tr>
+          <td>Caixa de roda traseira esquerda</td>
+          <td>
+            <label
+              >Trocar
+              <input type="checkbox" class="servico-checkbox" name="opcao"
+            /></label>
+            <label
+              >Restaurar
+              <input type="checkbox" class="servico-checkbox" name="opcao"
+            /></label>
+            <label
+              >Pintar <input type="checkbox" class="servico-checkbox"
+            /></label>
+          </td>
+          <td>
+            <input
+              type="number"
+              step="0.01"
+              class="valor-servico"
+              oninput="calcularTotal()"
+            />
+          </td>
+        </tr>
+        <tr>
+          <td>Caixa de roda traseira direita</td>
+          <td>
+            <label
+              >Trocar
+              <input type="checkbox" class="servico-checkbox" name="opcao"
+            /></label>
+            <label
+              >Restaurar
+              <input type="checkbox" class="servico-checkbox" name="opcao"
+            /></label>
+            <label
+              >Pintar <input type="checkbox" class="servico-checkbox"
+            /></label>
+          </td>
+          <td>
+            <input
+              type="number"
+              step="0.01"
+              class="valor-servico"
+              oninput="calcularTotal()"
+            />
+          </td>
+        </tr>
+        <tr>
+          <td>Tampa porta malas</td>
+          <td>
+            <label
+              >Trocar
+              <input type="checkbox" class="servico-checkbox" name="opcao"
+            /></label>
+            <label
+              >Restaurar
+              <input type="checkbox" class="servico-checkbox" name="opcao"
+            /></label>
+            <label
+              >Pintar <input type="checkbox" class="servico-checkbox"
+            /></label>
+          </td>
+
+          <td>
+            <input
+              type="number"
+              step="0.01"
+              class="valor-servico"
+              oninput="calcularTotal()"
+            />
+          </td>
+        </tr>
+        <tr>
+          <td>Teto</td>
+          <td>
+            <label
+              >Trocar
+              <input type="checkbox" class="servico-checkbox" name="opcao"
+            /></label>
+            <label
+              >Restaurar
+              <input type="checkbox" class="servico-checkbox" name="opcao"
+            /></label>
+            <label
+              >Pintar <input type="checkbox" class="servico-checkbox"
+            /></label>
+          </td>
+          <td>
+            <input
+              type="number"
+              step="0.01"
+              class="valor-servico"
+              oninput="calcularTotal()"
+            />
+          </td>
+        </tr>
+
+        <tr>
+          <td>Roda dianteira esquerda</td>
+          <td>
+            <label
+              >Trocar
+              <input type="checkbox" class="servico-checkbox" name="opcao"
+            /></label>
+            <label
+              >Restaurar
+              <input type="checkbox" class="servico-checkbox" name="opcao"
+            /></label>
+            <label
+              >Pintar <input type="checkbox" class="servico-checkbox"
+            /></label>
+          </td>
+          <td>
+            <input
+              type="number"
+              step="0.01"
+              class="valor-servico"
+              oninput="calcularTotal()"
+            />
+          </td>
+        </tr>
+
+        <tr>
+          <td>Roda dianteira direita</td>
+          <td>
+            <label
+              >Trocar
+              <input type="checkbox" class="servico-checkbox" name="opcao"
+            /></label>
+            <label
+              >Restaurar
+              <input type="checkbox" class="servico-checkbox" name="opcao"
+            /></label>
+            <label
+              >Pintar <input type="checkbox" class="servico-checkbox"
+            /></label>
+          </td>
+          <td>
+            <input
+              type="number"
+              step="0.01"
+              class="valor-servico"
+              oninput="calcularTotal()"
+            />
+          </td>
+        </tr>
+
+        <tr>
+          <td>Roda traseira esquerda</td>
+          <td>
+            <label
+              >Trocar
+              <input type="checkbox" class="servico-checkbox" name="opcao"
+            /></label>
+            <label
+              >Restaurar
+              <input type="checkbox" class="servico-checkbox" name="opcao"
+            /></label>
+            <label
+              >Pintar <input type="checkbox" class="servico-checkbox"
+            /></label>
+          </td>
+          <td>
+            <input
+              type="number"
+              step="0.01"
+              class="valor-servico"
+              oninput="calcularTotal()"
+            />
+          </td>
+        </tr>
+
+        <tr>
+          <td>Roda traseira direita</td>
+          <td>
+            <label
+              >Trocar
+              <input type="checkbox" class="servico-checkbox" name="opcao"
+            /></label>
+            <label
+              >Restaurar
+              <input type="checkbox" class="servico-checkbox" name="opcao"
+            /></label>
+            <label
+              >Pintar <input type="checkbox" class="servico-checkbox"
+            /></label>
+          </td>
+          <td>
+            <input
+              type="number"
+              step="0.01"
+              class="valor-servico"
+              oninput="calcularTotal()"
+            />
+          </td>
+        </tr>
+
+        <tr>
+          <td>Vidraçaria</td>
+          <td>
+            <label
+              >Trocar
+              <input type="checkbox" class="servico-checkbox" name="opcao"
+            /></label>
+            <label
+              >Restaurar
+              <input type="checkbox" class="servico-checkbox" name="opcao"
+            /></label>
+            <label
+              >Pintar <input type="checkbox" class="servico-checkbox"
+            /></label>
+          </td>
+
+          <td>
+            <input
+              type="number"
+              step="0.01"
+              class="valor-servico"
+              oninput="calcularTotal()"
+            />
+          </td>
+        </tr>
+
+        <tr>
+          <td>Mecânica</td>
+          <td>
+            <label
+              >Trocar
+              <input type="checkbox" class="servico-checkbox" name="opcao"
+            /></label>
+            <label
+              >Restaurar / R&I
+              <input type="checkbox" class="servico-checkbox" name="opcao"
+            /></label>
+          </td>
+          <td>
+            <input
+              type="number"
+              step="0.01"
+              class="valor-servico"
+              oninput="calcularTotal()"
+            />
+          </td>
+        </tr>
+
+        <tr>
+          <td>Elétrica</td>
+          <td>
+            <label
+              >Trocar
+              <input type="checkbox" class="servico-checkbox" name="opcao"
+            /></label>
+            <label
+              >Restaurar / R&I
+              <input type="checkbox" class="servico-checkbox" name="opcao"
+            /></label>
+          </td>
+          <td>
+            <input
+              type="number"
+              step="0.01"
+              class="valor-servico"
+              oninput="calcularTotal()"
+            />
+          </td>
+        </tr>
+
+        <tr>
+          <td>Forrações</td>
+          <td>
+            <label
+              >Trocar
+              <input type="checkbox" class="servico-checkbox" name="opcao"
+            /></label>
+            <label
+              >Restaurar / R&I
+              <input type="checkbox" class="servico-checkbox" name="opcao"
+            /></label>
+          </td>
+          <td>
+            <input
+              type="number"
+              step="0.01"
+              class="valor-servico"
+              oninput="calcularTotal()"
+            />
+          </td>
+        </tr>
+
+        <tr>
+          <td>Acessório</td>
+          <td>
+            <label
+              >Trocar
+              <input type="checkbox" class="servico-checkbox" name="opcao"
+            /></label>
+            <label
+              >Restaurar / R&I
+              <input type="checkbox" class="servico-checkbox" name="opcao"
+            /></label>
+          </td>
+          <td>
+            <input
+              type="number"
+              step="0.01"
+              class="valor-servico"
+              oninput="calcularTotal()"
+            />
+          </td>
+        </tr>
+
+        <tr>
+          <td>Higienização</td>
+          <td>
+            <label
+              >Veiculo total
+              <input type="checkbox" class="servico-checkbox" name="opcao"
+            /></label>
+            <label
+              >Parcial Pç
+              <input type="checkbox" class="servico-checkbox" name="opcao"
+            /></label>
+          </td>
+          <td>
+            <input
+              type="number"
+              step="0.01"
+              class="valor-servico"
+              oninput="calcularTotal()"
+            />
+          </td>
+        </tr>
+
+        <tr>
+          <td>Polimento</td>
+          <td>
+            <label
+              >Veiculo total
+              <input type="checkbox" class="servico-checkbox" name="opcao"
+            /></label>
+            <label
+              >Parcial Pç
+              <input type="checkbox" class="servico-checkbox" name="opcao"
+            /></label>
+          </td>
+          <td>
+            <input
+              type="number"
+              step="0.01"
+              class="valor-servico"
+              oninput="calcularTotal()"
+            />
+          </td>
+        </tr>
+
+        <tr>
+          <td>Outros Serviços</td>
+          <td></td>
+          <td>
+            <input
+              type="number"
+              step="0.01"
+              class="valor-servico"
+              oninput="calcularTotal()"
+            />
+          </td>
+        </tr>
+      </table>
+
+      <!-- Container para o total -->
+      <div class="total-container">
+        <span>Total:</span>
+        <span id="total">R$ 0.00</span>
+      </div>
+
+      <h3 style="background-color: black; color: #ffffff; padding: 10px 20px">
+        Observações
+      </h3>
+
+      <textarea
+        id="observacoes"
+        rows="4"
+        cols="100"
+        placeholder="Digite as observações aqui..."
+      ></textarea>
+
+      <br /><br /><br />
+
+      <button class="btn-salvar-pdf" onclick="salvarPDF()">
+        Gerar orçamento
+      </button>
+    </div>
+
+    <!-- Inclua as bibliotecas jsPDF e jsPDF-AutoTable -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.25/jspdf.plugin.autotable.min.js"></script>
+
+    <script src="app.js"></script>
+    <script src="sistema.js"></script>
+    
+    <script>// service-worker.js
+const CACHE_NAME = "blokiox-v1";
+const urlsToCache = ["sistema-blokiox.html", "desenho.css", "sistema.js" , "app.js" , "service-worker.js" , "manifest.json"];
+
+self.addEventListener("install", event => {
+    event.waitUntil(
+        caches.open(CACHE_NAME).then(cache => cache.addAll(urlsToCache))
+    );
+});
+
+self.addEventListener("fetch", event => {
+    event.respondWith(
+        caches.match(event.request).then(response => response || fetch(event.request))
+    );
+});</script>
+    
+  </body>
+</html>

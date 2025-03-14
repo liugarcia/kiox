@@ -1,0 +1,227 @@
+    
+        /* Estilos da página HTML (não afetam o PDF) */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        .container {
+            max-width: 800px;
+            margin: auto;
+            padding: 10px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+        table, th, td {
+            border: 1px solid black;
+        }
+        th, td {
+            padding: 8px;
+            text-align: left;
+        }
+        .header-table td {
+            border: none;
+            padding: 5px;
+        }
+        input[type="text"], input[type="number"] {
+            width: 100%;
+            box-sizing: border-box;
+        }
+        @media (max-width: 600px) {
+            .header-table, #servicos {
+                display: block;
+                overflow-x: auto;
+            }
+            table {
+                width: 100%;
+            }
+            th, td {
+                font-size: 14px;
+            }
+            label {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                margin-bottom: 5px;
+            }
+            input[type="checkbox"] {
+                margin-left: 10px;
+            
+            }
+          
+          
+ 
+          
+          
+          
+          
+          
+          
+        }
+        .car-image {
+            width: 300px;
+            height: auto;
+            display: block;
+            margin: 20px auto;
+        }
+        .btn-salvar-pdf {
+            display: block;
+            margin: 20px auto;
+            padding: 10px 20px;
+            background-color: black;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .btn-salvar-pdf:hover {
+            background-color: #585858;
+        }
+
+        /* Estilo para o cabeçalho da oficina */
+        .cabecalho-oficina {
+            max-width: 800px; /* Mesma largura do container */
+            margin: auto; /* Centraliza o cabeçalho */
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding: 10px;
+            background-color: #f0f0f0;
+            border-radius: 5px;
+        }
+        .cabecalho-oficina img {
+            max-width: 100px;
+            height: auto;
+        }
+        .cabecalho-oficina .info {
+            text-align: right;
+        }
+
+        /* Aplica o estilo apenas às linhas da tabela de serviços */
+        #servicos tr:nth-child(even) {
+            background-color: #f0f0f0; /* Cor de fundo cinza claro */
+        }
+
+        #servicos tr:nth-child(odd) {
+            background-color: white; /* Cor de fundo branca */
+        }
+
+        /* Alinha apenas os valores e o "R$" no canto direito */
+        #servicos td:nth-child(3) input,
+        #total {
+            text-align: right;
+        }
+
+        /* Alinha o total à direita */
+        .total-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color:black;
+            color: #ffffff;
+            padding: 10px 20px;
+        }
+        .total-container span {
+            color: #A9F5A9;
+        }
+    
+ 
+     .loading-container {
+            position: relative;
+            width: 150px;
+            height: 150px;
+        }
+
+        .spinner {
+            width: 100%;
+            height: 100%;
+            border: 10px solid #ddd;
+            border-top: 10px solid #007bff;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        .loading-text {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 14px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .hidden {
+            display: none;
+        }
+
+
+
+
+
+/* Esconde o checkbox padrão */
+.servico-checkbox {
+  appearance: none; /* Remove o estilo padrão */
+  -webkit-appearance: none; /* Para navegadores baseados no WebKit (Chrome, Safari) */
+  -moz-appearance: none; /* Para Firefox */
+  width: 16px;
+  height: 16px;
+  border: 2px solid black; /* Borda preta */
+  border-radius: 3px; /* Cantos levemente arredondados */
+  outline: none;
+  cursor: pointer;
+  vertical-align: middle;
+  position: relative;
+}
+
+/* Estilo quando o checkbox está marcado */
+.servico-checkbox:checked {
+  background-color: black; /* Fundo preto */
+}
+
+/* Adiciona um "tick" (marca de seleção) personalizado */
+.servico-checkbox:checked::after {
+  content: "✔"; /* Símbolo de check */
+  font-size: 12px;
+  color: white; /* Cor do tick */
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+
+
+
+#observacoes {
+    width: 97%;
+    padding: 10px;
+    margin-top: 2px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+
+
+
+
+
+
+/* Ajustes para telas pequenas (por exemplo, telas com largura máxima de 600px) */
+@media (max-width: 600px) {
+    #observacoes {
+        width: 94%; /* Ocupa toda a largura disponível */
+        padding: 8px; /* Reduz o padding para economizar espaço */
+        font-size: 14px; /* Reduz o tamanho da fonte para melhor legibilidade */
+        margin-top: 5px; /* Ajusta a margem superior */
+    }
+}

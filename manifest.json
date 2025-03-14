@@ -2,7 +2,7 @@
 {
     "name": "Blokiox",
     "short_name": "Blokiox",
-   "start_url": "/",
+   "start_url": "https://www.blokiox.com/sistema-blokiox.html",
     "display": "standalone",
     "background_color": "#ffffff",
     "theme_color": "black",
